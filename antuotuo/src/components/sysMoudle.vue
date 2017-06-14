@@ -1,5 +1,5 @@
 <template>
-  <div class="sysUser">
+  <div class="sysMoudle">
     <div class="fond">
       <div class="fond-title">
         <el-row :gutter="20">
@@ -9,7 +9,7 @@
         </el-row>
       </div>
       <el-row :gutter="20">
-        <el-col :span="6">
+        <el-col :span="5">
           <div class="grid-content bg-purple">
             <el-input
               placeholder="用户名"
@@ -19,7 +19,7 @@
             </el-input>
           </div>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="5">
           <div class="grid-content bg-purple">
             <el-input
               placeholder="手机号"
@@ -29,7 +29,7 @@
             </el-input>
           </div>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="5">
           <div class="grid-content bg-purple">
             <el-input
               placeholder="等级"
@@ -39,7 +39,7 @@
             </el-input>
           </div>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="5">
           <div class="grid-content bg-purple">
             <el-input
               placeholder="用户名"
@@ -47,6 +47,22 @@
               v-model="input2"
               :on-icon-click="handleIconClick">
             </el-input>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div class="drobe-down">
+            <el-dropdown>
+                <span class="el-dropdown-link">
+                  菜单选择<i class="el-icon-caret-bottom el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>基金会系统</el-dropdown-item>
+                  <el-dropdown-item>基金会系统2</el-dropdown-item>
+                  <el-dropdown-item>基金会系统3</el-dropdown-item>
+                  <el-dropdown-item disabled>基金会系统4</el-dropdown-item>
+                  <el-dropdown-item divided>基金会系统5</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
           </div>
         </el-col>
       </el-row>
@@ -61,52 +77,58 @@
         </el-row>
       </div>
       <el-row :gutter="20">
+        <el-col :span="2" class="new-button">
+          <el-button type="primary"  @click="dialogFormVisible = true">新 增</el-button>
+        </el-col>
+        <el-col :span="2" class="new-button">
+          <el-button type="primary" @click="dialogTableVisible = true" >操 作</el-button>
+        </el-col>
         <el-col :span="24">
           <el-table
-            :data="tableData"
-            border
-            style="width: 100%">
-            <el-table-column
-              fixed
-              prop="date"
-              label="日期"
-              width="150">
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="姓名"
-              width="120">
-            </el-table-column>
-            <el-table-column
-              prop="province"
-              label="省份"
-              width="120">
-            </el-table-column>
-            <el-table-column
-              prop="city"
-              label="市区"
-              width="120">
-            </el-table-column>
-            <el-table-column
-              prop="address"
-              label="地址"
-              width="300">
-            </el-table-column>
-            <el-table-column
-              prop="zip"
-              label="邮编"
-              width="120">
-            </el-table-column>
-            <el-table-column
-              fixed="right"
-              label="操作"
-              width="100">
-              <template scope="scope">
-                <el-button @click="handleClick" type="text" size="small">查看</el-button>
-                <el-button type="text" size="small" @click="dialogFormVisible = true">编辑</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
+              :data="tableData"
+              border
+              style="width: 100%">
+              <el-table-column
+                label="日期"
+                width="180">
+                <template scope="scope">
+                  <el-icon name="time"></el-icon>
+                  <span style="margin-left: 10px">{{ scope.row.date }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="姓名"
+                width="180">
+                <template scope="scope">
+                  <el-popover trigger="hover" placement="top">
+                    <p>姓名: {{ scope.row.name }}</p>
+                    <p>住址: {{ scope.row.address }}</p>
+                    <div slot="reference" class="name-wrapper">
+                      <el-tag>{{ scope.row.name }}</el-tag>
+                    </div>
+                  </el-popover>
+                </template>
+              </el-table-column>
+              <el-table-column
+                prop="address"
+                label="地址">
+              </el-table-column>
+              <el-table-column
+                prop="address"
+                label="地址">
+              </el-table-column>
+              <el-table-column label="操作">
+                <template scope="scope">
+                  <el-button
+                    size="small"
+                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                  <el-button
+                    size="small"
+                    type="danger"
+                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
         </el-col>
       </el-row>
     </div>
@@ -155,101 +177,50 @@
 
 <script>
   export default {
-    name: 'sysUser',
+    name: 'sysMoudle',
     data() {
       return {
         input2:'',
         tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
           date: '2016-05-02',
           name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
+          address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-04',
           name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
+          address: '上海市普陀区金沙江路 1517 弄'
         }, {
           date: '2016-05-01',
           name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
+          address: '上海市普陀区金沙江路 1519 弄'
+        },{
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },{
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },{
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },{
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },{
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },{
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
         }],
         currentPage1: 5,
         currentPage2: 5,
@@ -297,10 +268,6 @@
       handleDelete(index, row) {
         console.log(index, row);
       },
-      handleClick() {
-        console.log(1);
-        this.dialogTableVisible = true;
-      },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
@@ -313,7 +280,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.sysUser{
+.sysMoudle{
   padding:  20px;
   width:100%;
   box-sizing: border-box;
@@ -329,9 +296,25 @@
         border-bottom: 1px solid #eee;
       }
     }
+    .drobe-down{
+      background-color: #fff;
+      background-image: none;
+      border-radius: 4px;
+      border: 1px solid #bfcbd9;
+      box-sizing: border-box;
+      color: #1f2d3d;
+      font-size: inherit;
+      height: 36px;
+      line-height: 1;
+      outline: 0;
+      padding: 10px 10px;
+    }
   }
   .excl{
     margin-top: 30px;
+    .new-button{
+      padding-bottom: 10px;
+    }
     .excl-title{
       p{
         font-size: 16px;

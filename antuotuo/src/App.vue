@@ -5,13 +5,20 @@
     </button>
     <div class="header-top"></div>
     <div class="view-left" :class="viewLeft">
-      <router-view></router-view>
+      <transition name="router-fade" mode="out-in">
+			<keep-alive>
+			    <router-view v-if="$route.meta.keepAlive"></router-view>
+			</keep-alive>
+    	</transition>
+    	<transition name="router-fade" mode="out-in">
+			<router-view v-if="!$route.meta.keepAlive"></router-view>
+		</transition>
     </div>
     <div class="view-down" :class="{ active: currentView == 'view-down' }">
-      <component v-bind:is="viewDownComponent"></component>
+      <!-- <component v-bind:is="viewDownComponent"></component> -->
     </div>
     <div class="view-up" :class="{ active: currentView == 'view-up' }">
-      <component v-bind:is="viewUpComponent" @login="switchView"></component>
+      <component v-bind:is="viewUpComponent" @login="switchView" @linkTo="linker" :initItems="showBlank" ></component>
     </div>
     <div class="blank" :class="showBlank" @click="closeBlank"></div>
   </div>
@@ -28,7 +35,7 @@ export default {
         currentView: 'view-main',
         viewUpComponent:'listStay',
         viewDownComponent:'hello',
-        showBlank:'',
+        showBlank:'1',
         viewLeft:''
       }
   },
@@ -52,6 +59,11 @@ export default {
       this.currentView = 'view-main';
       this.viewLeft = '';
     },
+    linker: function (){
+      this.currentView = 'view-main';
+      this.showBlank = '';
+      this.viewLeft = '';
+    }
   },
   components:{
     listStay ,
@@ -70,6 +82,13 @@ export default {
   position: relative;
   height:100%;
   width:100%;
+  overflow: hidden;
+  .router-fade-enter-active, .router-fade-leave-active {
+	  	transition: opacity  .3s;
+	}
+	.router-fade-enter, .router-fade-leave-active {
+	  	opacity: 0;
+	}
   .btn {
     position: fixed;
     top: 55px;
@@ -120,7 +139,6 @@ export default {
       position: fixed;
       top: 0;
       left: 0;
-      overflow: hidden;
       transition: .4s;
       transform: translate3d(-200px, 0, 0);
       z-index: 600;
@@ -136,6 +154,7 @@ export default {
       padding-left: 50px;
       position: relative;
       padding-top: 50px;
+      overflow: scroll;
       &.active{
         padding-left: 250px;
       }
@@ -149,7 +168,7 @@ export default {
       top: 0;
       left: 0;
       transition: .4s;
-      overflow: hidden;
+      // overflow: hidden;
       transform: translate3d(-200px, 0, 0);
       z-index: 600;
       &.active {
