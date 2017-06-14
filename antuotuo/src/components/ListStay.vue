@@ -1,9 +1,11 @@
 <template>
   <div class="listStay">
-    <p>gogogogogo</p>
+    <div class="listStayOn">
+      <img src="../../static/admin.png" alt="">
+      <p>gogogogogo</p>
 
-    <button type="button" name="button" @click="$emit('login')">出来吧</button>
-
+      <button type="button" name="button" @click="$emit('login')">出来吧</button>
+    </div>
   </div>
 </template>
 
@@ -21,9 +23,14 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .listStay{
-    height:200px;
+    height: 100%;
     width:100%;
-    background: green;
+    .listStayOn{
+      height: 100%;
+      width:100%;
+      background: #004332;
+      color:#fff;
+    }
   }
 
 </style>
