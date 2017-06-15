@@ -1,6 +1,6 @@
 <template>
   <div class="listStay ">
-    <div class="listStayOn active">
+    <div class="listStayOn " :class="listStayActive">
       <div class="img-box">
         <img src="../../static/admin.png" alt="">
       </div>
@@ -25,6 +25,7 @@ import {listStays} from '@/data'
     data() {
       return {
         listStays:listStays,
+        listStayActive:''
       }
     },
     methods: {
@@ -34,6 +35,7 @@ import {listStays} from '@/data'
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       }
+
     },
     created() {
       console.log(this.showBlank)
@@ -146,5 +148,4 @@ import {listStays} from '@/data'
       }
     }
   }
-
 </style>

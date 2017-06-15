@@ -43,5 +43,11 @@ export const listStays = [
     title:'数据字典管理',
     icon:'glyphicon-education',
     router: '/'
+  },
+  {
+    title:'数据字典管理',
+    icon:'glyphicon-education',
+    router: '/'
   }
+
 ];
