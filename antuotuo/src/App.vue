@@ -230,7 +230,7 @@ export default {
         padding: 0;
         border: 0;
         background: rgba(0, 0, 0, 0.7);
-        border-radius: 3px;
+        // border-radius: 3px;
         outline: none;
         font-weight: bold;
         font-size: 17px;
