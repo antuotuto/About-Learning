@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-  <button type="button" name="button" class="btn" @click="toggleView">
+    <button type="button" name="button" class="btn" @click="toggleView">
         <span class="glyphicon " :class="{'glyphicon-th':currentView == 'view-main','glyphicon-remove':currentView != 'view-main'}"></span>
     </button>
   <div class="header-top"></div>
