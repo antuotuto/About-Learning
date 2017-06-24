@@ -39,7 +39,7 @@
       <p class="context-frist"><span>电话：</span>0871-63627444</p>
       <p class="context-frist"><span>特别推荐馆内美食：</span>石屏豆腐，其独特的风味在云南全省享有盛名；此外如状元干巴条、龙穿凤翅、科举山珍卷、金榜题名等，都是值得一尝的特色美食</p>
       <h4 class="context-third"><span class="house"></span>住宿</h4>
-      <p class="context-fourth">丘北天成太合酒店<span>（含第二天双早）</span><span class="start"></span> <span class="start"></span> <span class="start"></span> <span class="start"></span> <span class="start"></span></p>
+      <p class="context-fourth"><span>丘北天成太合酒店</span>（含第二天双早）<span class="start"></span>  <span class="start"></span> <span class="start"></span> <span class="start"></span> <span class="start"></span></p>
       <div class="img-box-one">
         <div class="left">
           <img src="../assets/addProject/animg1111.png" alt="">
@@ -84,7 +84,7 @@
         </div>
       </div>
       <p class="context-frist">丘北天成太合酒店位于石缸坝新城区“椒莲广场”旁，是集客房、餐饮、会议、商务会所、娱乐为一体的多功能涉外酒店。丘北天成太合酒店的客房安静、整洁，现代简约的客房配以完善的设施，柔软的床榻与配套设施保证您良好的睡眠质量。</p>
-      <h4><span class="red-left">D2</span>昆明-丘北路程图</h4>
+      <h4><span class="red-left">D4</span>昆明-丘北路程图</h4>
       <div class="img-box-one">
         <div class="left">
           <img src="../assets/addProject/animg11.png" alt="">
